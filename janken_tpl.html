@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/sample.css" />
+    <title>じゃんけん</title>
+  </head>
+  <body>
+    <header>
+      <!-- <h1>じゃんけん</h1>
+      勝ち：<div id="win"></div>
+      負け：<div id="lose"></div> -->
+    </header>
+    <main>
+      <ul>
+        <li id="gu_btn" value="go">グー</li>
+        <li id="cho_btn" value="cho">チョキ</li>
+        <li id="par_btn" value="par">パー</li>
+      </ul>
+      <div>
+        コンピュータの出した手は？ 「
+        <div
+          id="pc_hands"
+          style="color: red; display: inline-block; _display: inline"
+        ></div>
+        」
+      </div>
+      <div id="judgment">勝ち</div>
+      <p id="sample"></p>
+    </main>
+    <footer></footer>
+    <script>
+      const gu = document.getElementById("gu_btn");
+      const cho = document.getElementById("cho_btn");
+      const par = document.getElementById("par_btn");
+
+      gu.addEventListener("click", function () {
+        let play = "グー";
+        let pc = ranAry();
+        let judg = judgment(play, pc);
+      });
+
+      cho.addEventListener("click", function () {
+        let play = "チョキ";
+        let pc = ranAry();
+        let judg = judgment(play, pc);
+      });
+
+      par.addEventListener("click", function () {
+        let play = "パー";
+        let pc = ranAry();
+        let judg = judgment(play, pc);
+      });
+
+      function ranAry() {
+        var pc_jan = ["グー", "チョキ", "パー"];
+        let pcJan = pc_jan[Math.floor(Math.random() * pc_jan.length)];
+        document.getElementById("pc_hands").innerHTML = pcJan;
+        return pcJan;
+      }
+
+      function judgment(player, pc) {
+        let result;
+        if (player == pc) {
+          result = "引き分け";
+        } else if (player == "グー" && pc == "チョキ") {
+          result = "勝ち";
+        } else if (player == "グー" && pc == "パー") {
+          result = "負け";
+        } else if (player == "チョキ" && pc == "グー") {
+          result = "負け";
+        } else if (player == "チョキ" && pc == "パー") {
+          result = "勝ち";
+        } else if (player == "パー" && pc == "グー") {
+          result = "勝ち";
+        } else if (player == "パー" && pc == "チョキ") {
+          result = "負け";
+        }
+
+        document.getElementById("judgment").innerHTML = result;
+        let win = 100;
+        win += 1
+        document.getElementById("win").innerHTML = win;
+        return result;
+      }
+
+      window.onload = function () {
+        let win = 0;
+        let lose = 0;
+      };
+    </script>
+  </body>
+</html>
